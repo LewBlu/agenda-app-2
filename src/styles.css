@@ -2,3 +2,14 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --error: rgb(219 39 119);
+}
+
+input, textarea, select {
+    &.ng-touched.ng-invalid {
+        border-color: var(--error)!important;
+        border-width: 2px;
+    }
+}

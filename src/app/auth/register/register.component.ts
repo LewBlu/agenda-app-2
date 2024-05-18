@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +18,12 @@ export class RegisterComponent {
     confirm_password: new FormControl(null, Validators.required),
   });
 
+  constructor(private authService: AuthService) {}
+
   registerUser() {
-    console.log(this.registerForm.value);
+    if(!this.registerForm) {
+      return;
+    }
+    this.authService.registerUser(this.registerForm.value);
   }
 }
