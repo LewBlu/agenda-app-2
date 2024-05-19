@@ -15,7 +15,7 @@ export class RegisterComponent {
     name: new FormControl(null, Validators.required),
     email: new FormControl(null, [Validators.required, Validators.email]),
     password: new FormControl(null, Validators.required),
-    confirm_password: new FormControl(null, Validators.required),
+    password_confirmation: new FormControl(null, Validators.required),
   });
 
   constructor(private authService: AuthService) {}
@@ -24,6 +24,6 @@ export class RegisterComponent {
     if(!this.registerForm) {
       return;
     }
-    this.authService.registerUser(this.registerForm.value);
+    this.authService.registerUser(this.registerForm);
   }
 }
