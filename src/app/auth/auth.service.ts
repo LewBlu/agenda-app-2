@@ -1,13 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap } from 'rxjs';
-import { User } from '../shared/interfaces/user';
+import { User } from '../shared/models/user';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  userDetails = new BehaviorSubject<User|null>(null);
+  userDetails$ = new BehaviorSubject<User|null>(null);
   constructor(private httpClient: HttpClient) { }
 
   // Attempt to login a user
@@ -40,10 +40,15 @@ export class AuthService {
 
   // Sets the behavior subject that contains the users details
   setUserDetails(userDetails: User|null) {
-    this.userDetails.next(null);
+    this.userDetails$.next(userDetails);
+    if(userDetails !== null) {
+      localStorage.setItem('user', JSON.stringify(userDetails));
+    } else {
+      localStorage.removeItem('user');
+    }
   }
 
   checkLoggedIn() {
-    return this.userDetails.value === null;
+    return this.userDetails$.value === null;
   }
 }
