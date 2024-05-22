@@ -2,13 +2,20 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, switchMap } from 'rxjs';
 import { User } from '../shared/models/user';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   userDetails$ = new BehaviorSubject<User|null>(null);
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private router: Router) { 
+    const storedUser = localStorage.getItem("currentUser");
+    if (storedUser) {
+      this.setUserDetails(JSON.parse(storedUser));
+      return;
+    }
+  }
 
   // Attempt to login a user
   loginUser(userDetails: any) {
@@ -16,7 +23,10 @@ export class AuthService {
     .pipe(
       switchMap(() => this.httpClient.post('login', userDetails)),
       switchMap(() => this.httpClient.get('api/user')),
-    ).subscribe((res: any) => this.setUserDetails(res));
+    ).subscribe((res: any) => {
+      this.setUserDetails(res);
+      this.router.navigate(['/']);
+    });
   }
 
   // Create a new user within the application
@@ -25,11 +35,14 @@ export class AuthService {
     .pipe(
       switchMap(() => this.httpClient.post('register', userDetails)),
       switchMap(() => this.httpClient.get('api/user')),
-    ).subscribe((res: any) => this.setUserDetails(res));
+    ).subscribe((res: any) => {
+      this.setUserDetails(res);
+      this.router.navigate(['/']);
+    });
   }
 
   // Fetch details from the backend for the logged in user
-  fetchLoggedInUser() {
+  fetchLoggedInUser(): void {
     this.httpClient.get('api/user').subscribe((res: any) => this.setUserDetails(res));
   }
 
@@ -42,13 +55,9 @@ export class AuthService {
   setUserDetails(userDetails: User|null) {
     this.userDetails$.next(userDetails);
     if(userDetails !== null) {
-      localStorage.setItem('user', JSON.stringify(userDetails));
+      localStorage.setItem('currentUser', JSON.stringify(userDetails));
     } else {
-      localStorage.removeItem('user');
+      localStorage.removeItem('currentUser');
     }
-  }
-
-  checkLoggedIn() {
-    return this.userDetails$.value === null;
   }
 }
