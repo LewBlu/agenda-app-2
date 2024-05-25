@@ -11,9 +11,12 @@ export class AuthService {
   userDetails$ = new BehaviorSubject<User|null>(null);
   constructor(private httpClient: HttpClient, private router: Router) { 
     const storedUser = localStorage.getItem("currentUser");
+    const currentDate = new Date();
     if (storedUser) {
-      this.setUserDetails(JSON.parse(storedUser));
-      return;
+      let parsedUser = JSON.parse(storedUser);
+      if(parsedUser.timestamp > currentDate) {
+        this.setUserDetails(parsedUser);
+      }
     }
   }
 
@@ -55,6 +58,8 @@ export class AuthService {
   setUserDetails(userDetails: User|null) {
     this.userDetails$.next(userDetails);
     if(userDetails !== null) {
+      let date = new Date();
+      userDetails.timestamp = date.setHours(date.getHours() + 2);
       localStorage.setItem('currentUser', JSON.stringify(userDetails));
     } else {
       localStorage.removeItem('currentUser');

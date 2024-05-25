@@ -8,4 +8,5 @@ export interface User {
     two_factor_secret?: string;
     updated_at: string;
     created_at: string;
+    timestamp?: number;
 }
