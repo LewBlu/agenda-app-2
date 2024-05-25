@@ -63,6 +63,7 @@ export class AuthService {
       localStorage.setItem('currentUser', JSON.stringify(userDetails));
     } else {
       localStorage.removeItem('currentUser');
+      this.router.navigate(['login']);
     }
   }
 }
