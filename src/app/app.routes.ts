@@ -6,7 +6,7 @@ import { IssuesComponent } from './pages/issues/issues.component';
 import { authGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
-    { path: '', component: IssuesComponent, canActivate: [authGuard]},
+    { path: 'issues', component: IssuesComponent, canActivate: [authGuard] },
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: '**', component: PageNotFoundComponent }
