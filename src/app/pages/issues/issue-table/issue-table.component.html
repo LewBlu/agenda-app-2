@@ -18,8 +18,8 @@
             <td class="p-2">{{ issue.owner.name }}</td>
             <td class="p-2">
                 <ul class="flex flex-wrap gap-1">
-                    <li class="text-sm text-white bg-indigo-300 rounded flex group">
-                        <span class="px-3">Example</span>
+                    <li *ngFor="let tag of issue.tags" class="text-sm text-white bg-indigo-300 rounded flex group">
+                        <span class="px-3">{{ tag.tag }}</span>
                         <span class="me-1 hidden cursor-pointer group-hover:flex items-center"><i class="fa-solid fa-xmark"></i></span>
                     </li>
                 </ul>
