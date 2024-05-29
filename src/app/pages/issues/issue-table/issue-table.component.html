@@ -14,8 +14,8 @@
         <tr *ngFor="let issue of issues" class="border-b cursor-pointer hover:bg-gray-100">
             <td class="p-2">{{ issue.key }}-{{ issue.key_number }}</td>
             <td class="p-2">{{ issue.summary }}</td>
-            <td class="p-2">{{ issue.assignee_id }}</td>
-            <td class="p-2">{{ issue.owner_id }}</td>
+            <td class="p-2">{{ issue.assignee.name }}</td>
+            <td class="p-2">{{ issue.owner.name }}</td>
             <td class="p-2">
                 <ul class="flex flex-wrap gap-1">
                     <li class="text-sm text-white bg-indigo-300 rounded flex group">
