@@ -21,9 +21,9 @@ export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   registerUser() {
-    if(!this.registerForm) {
+    if(!this.registerForm.valid) {
       return;
     }
-    this.authService.registerUser(this.registerForm);
+    this.authService.registerUser(this.registerForm.value);
   }
 }
