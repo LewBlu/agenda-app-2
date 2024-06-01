@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueTableComponent } from './issue-table/issue-table.component';
-import { HttpClient } from '@angular/common/http';
+import { IssueService } from '../../shared/services/issue.service';
+import { Issue } from '../../shared/models/issue';
 
 @Component({
   selector: 'app-issues',
@@ -10,14 +11,14 @@ import { HttpClient } from '@angular/common/http';
   styleUrl: './issues.component.css'
 })
 export class IssuesComponent implements OnInit {
+  issues: Issue[] = [];
 
-  issues: any;
-
-  constructor(private httpClient: HttpClient) {}
+  constructor(private issueService: IssueService) {}
 
   ngOnInit(): void {
-    this.httpClient.get('api/issue').subscribe(res => {
-      this.issues = res;
+    this.issueService.issues$.subscribe((issues: Issue[] | undefined) => {
+      this.issues = issues ?? [];
     });
+    this.issueService.fetchIssues();
   }
 }
