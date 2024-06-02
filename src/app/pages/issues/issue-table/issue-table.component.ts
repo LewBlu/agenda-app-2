@@ -1,5 +1,7 @@
 import { NgFor } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { IssueModalComponent } from '../../../shared/components/issue-modal/issue-modal.component';
 
 @Component({
   selector: 'app-issue-table',
@@ -8,7 +10,17 @@ import { Component, Input } from '@angular/core';
   templateUrl: './issue-table.component.html',
   styleUrl: './issue-table.component.css'
 })
-export class IssueTableComponent {
+export class IssueTableComponent implements OnInit {
 
   @Input() issues: any;
+
+  constructor(private smartModal: NgxSmartModalService, private vcr: ViewContainerRef) {}
+
+  ngOnInit(): void {
+    this.smartModal.create('issueModal', IssueModalComponent, this.vcr);
+  }
+
+  openIssueModal() {
+    this.smartModal.getModal('issueModal').open();
+  }
 }

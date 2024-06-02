@@ -11,7 +11,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let issue of issues" class="border-b cursor-pointer hover:bg-gray-100">
+        <tr *ngFor="let issue of issues" class="border-b cursor-pointer hover:bg-gray-100" (click)="openIssueModal()">
             <td class="p-2">{{ issue.key }}-{{ issue.key_number }}</td>
             <td class="p-2">{{ issue.summary }}</td>
             <td class="p-2">{{ issue.assignee.name }}</td>
