@@ -12,4 +12,5 @@ import { CommonModule } from '@angular/common';
 })
 export class TagListComponent {
   @Input() tags: Tag[] = [];
+  @Input() allowAdd: boolean = false;
 }
