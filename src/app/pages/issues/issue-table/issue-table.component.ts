@@ -3,6 +3,7 @@ import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { NgxSmartModalService } from 'ngx-smart-modal';
 import { IssueModalComponent } from '../../../shared/components/issue-modal/issue-modal.component';
 import { TagListComponent } from '../../../shared/components/tag-list/tag-list.component';
+import { Issue } from '../../../shared/models/issue';
 
 @Component({
   selector: 'app-issue-table',
@@ -13,7 +14,7 @@ import { TagListComponent } from '../../../shared/components/tag-list/tag-list.c
 })
 export class IssueTableComponent implements OnInit {
 
-  @Input() issues: any;
+  @Input() issues: Issue[] = [];
 
   constructor(private smartModal: NgxSmartModalService, private vcr: ViewContainerRef) {}
 
@@ -21,7 +22,9 @@ export class IssueTableComponent implements OnInit {
     this.smartModal.create('issueModal', IssueModalComponent, this.vcr);
   }
 
-  openIssueModal() {
+  openIssueModal(issue: Issue) {
+    let modal = this.smartModal.getModal('issueModal');
+    modal.setData(issue);
     this.smartModal.getModal('issueModal').open();
   }
 }

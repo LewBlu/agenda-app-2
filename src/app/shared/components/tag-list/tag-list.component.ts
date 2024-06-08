@@ -11,5 +11,5 @@ import { CommonModule } from '@angular/common';
   styleUrl: './tag-list.component.css'
 })
 export class TagListComponent {
-  @Input() tags!: Tag[];
+  @Input() tags: Tag[] = [];
 }

@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { NgxSmartModalService } from 'ngx-smart-modal';
+import { Issue } from '../../models/issue';
 
 @Component({
   selector: 'app-issue-modal',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
   templateUrl: './issue-modal.component.html',
   styleUrl: './issue-modal.component.css'
 })
-export class IssueModalComponent {
+export class IssueModalComponent implements OnInit{
+  issue!: Issue;
+  constructor(private smartModal: NgxSmartModalService) {}
 
+  ngOnInit(): void {
+    this.issue = <Issue>this.smartModal.getModal('issueModal').getData();
+  }
 }

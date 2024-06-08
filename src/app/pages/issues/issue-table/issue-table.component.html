@@ -11,11 +11,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let issue of issues" class="border-b cursor-pointer hover:bg-gray-100" (click)="openIssueModal()">
+        <tr *ngFor="let issue of issues" class="border-b cursor-pointer hover:bg-gray-100" (click)="openIssueModal(issue)">
             <td class="p-2">{{ issue.key }}-{{ issue.key_number }}</td>
             <td class="p-2">{{ issue.summary }}</td>
-            <td class="p-2">{{ issue.assignee.name }}</td>
-            <td class="p-2">{{ issue.owner.name }}</td>
+            <td class="p-2">{{ issue.assignee?.name ?? '' }}</td>
+            <td class="p-2">{{ issue.owner?.name ?? '' }}</td>
             <td class="p-2">
                 <app-tag-list [tags]="issue.tags"></app-tag-list>
             </td>

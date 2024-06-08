@@ -11,7 +11,7 @@ export interface Issue {
     owner_id?: number;
     owner?: User;
     start_date?: Date;
-    end_date?: Date;
+    due_date?: Date;
     created_at: Date;
-    tags?: Tag[];
+    tags: Tag[];
 }
