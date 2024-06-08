@@ -1,1 +1,69 @@
-<p>issue-modal works! with issue id of {{ issue.id }}</p>
+<section class="flex flex-row gap-4 mx-4">
+    <article class="flex flex-col items-stretch basis-3/4">
+        <h1 class="text-2xl py-1 font-bold mb-1 text-start">{{ issue.summary }}</h1>
+        <div class="flex flex-col items-stretch">
+            <label class="mb-2 text-start" >Description</label>
+            <!-- <p class="text-start border rounded-md p-2 self-stretch">{{ issue.description }}</p> -->
+        </div>
+    </article>
+    <aside class="flex flex-col border rounded-md basis-1/4 text-sm py-2">
+        <!-- Issue side details -->
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Status</label>
+            <p>Backlog</p>
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Assignee</label>
+            <!-- <p>
+                @if($issue->assignee)
+                <span class="text-xs font-bold p-1 rounded-full bg-gray-100 dark:bg-gray-600 text-sm text-gray-600 dark:text-gray-300">{{ $issue->assignee->initial }}</span>
+                {{ $issue->assignee->name }}
+                @else
+                Not assigned
+                @endif
+            </p> -->
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Owner</label>
+            <!-- <p>
+                @if($issue->owner)
+                <span class="text-xs font-bold p-1 rounded-full bg-gray-100 dark:bg-gray-600 text-sm text-gray-600 dark:text-gray-300">{{ $issue->owner->initial }}</span>
+                {{ $issue->owner->name }}
+                @else
+                Not assigned
+                @endif
+            </p> -->
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Application</label>
+            <ul class="flex flex-wrap gap-1">
+                <li class="text-sm text-white bg-green-300 rounded flex group"><span class="px-3">Example App 1</span><span class="me-1 hidden cursor-pointer group-hover:flex items-center"><i class="fa-solid fa-xmark"></i></span></li>
+                <li class="px-1 text-sm bg-gray-100 rounded cursor-pointer hover:bg-gray-200 hover:font-bold">+</li>
+            </ul>
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Tags</label>
+            <app-tag-list [tags]="issue.tags"></app-tag-list>
+            <!-- <form id="new-tag-form" class="self-stretch hidden">
+                <input type="text" name="tag" class="block w-full rounded-md h-6 mt-1 border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+                <input type="hidden" name="issue_id" [value]="issue.id">
+            </form> -->
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Start Date</label>
+            <p>{{ issue.start_date }}</p>
+        </div>
+        <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Due Date</label>
+            <p>{{ issue.due_date }}</p>
+        </div>
+        <!-- <div class="flex flex-col items-start py-1 px-2">
+            <label class="font-bold">Parent</label>
+            @if($issue->parent)
+            <a href="issue/{{ $issue->parent->id }}" class="text-indigo-400 underline">{{ $issue->parent->key }}</a>
+            @else
+            <p class="font-light">N/A</p>
+            @endif
+        </div> -->
+    </aside>
+</section>

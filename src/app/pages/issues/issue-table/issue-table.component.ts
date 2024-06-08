@@ -19,12 +19,11 @@ export class IssueTableComponent implements OnInit {
   constructor(private smartModal: NgxSmartModalService, private vcr: ViewContainerRef) {}
 
   ngOnInit(): void {
-    this.smartModal.create('issueModal', IssueModalComponent, this.vcr);
+    this.smartModal.create('issueModal', IssueModalComponent, this.vcr, { customClass: 'max-w-none w-3/4'});
   }
 
   openIssueModal(issue: Issue) {
     let modal = this.smartModal.getModal('issueModal');
-    modal.setData(issue);
-    this.smartModal.getModal('issueModal').open();
+    modal.setData(issue, true).open();
   }
 }
